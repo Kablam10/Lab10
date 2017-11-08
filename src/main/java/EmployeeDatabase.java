@@ -9,6 +9,7 @@ import java.util.List;
  * the functions in the other class as well. And, of course, fix the checkstyle errors.
  *
  * @see <a href="https://cs125.cs.illinois.edu/lab/10/">Lab 10 Description</a>
+ * @author mpiunti2
  */
 public class EmployeeDatabase {
 
