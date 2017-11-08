@@ -15,6 +15,7 @@ public class EmployeeDatabase {
     /**
      * List of employees.
      */
+    @SuppressWarnings("checkstyle:visibilitymodifier")
     public List<Employee> employees;
 
     /**
@@ -30,10 +31,10 @@ public class EmployeeDatabase {
     /**
      * Returns the manager for the given employee.
      *
-     * @param employee
-     * @return
+     * @param employee the employee whose manager to return
+     * @return the manager
      */
-    Employee findManager(final Employee employee) {
+    final Employee findManager(final Employee employee) {
         Employee manager = null;
         for (int i = 0; i < employees.size(); i++) {
             if (employees.get(i).getName() == employee.getManager()) {
@@ -50,12 +51,16 @@ public class EmployeeDatabase {
      * Consider both a recursive and an iterative solution to this problem.
      *
      * @param employee name of the employee
-     * @return int
+     * @return number of managers above this employee
      */
     public int countManagersAbove(final Employee employee) {
-        /*
-         * Implement this function
-         */
+        Employee e = employee;
+        int managers = 0;
+        while (!e.getManager().equals("")) {
+            managers++;
+            e = this.findManager(e);
+        }
+        return managers;
     }
 
     /**
@@ -63,13 +68,17 @@ public class EmployeeDatabase {
      * <p>
      * Consider both a recursive and an iterative solution to this problem.
      *
-     * @param employee name of the employee
-     * @return int
+     * @param employee name of the manager
+     * @return number of employees under this manager
      */
     public int countEmployeesUnder(final Employee employee) {
-        /*
-         * Implement this function
-         */
+        int count = 0;
+        for (int i = 0; i < employees.size(); i++) {
+            if (employees.get(i).getManager() == employee.getName()) {
+                count += (countEmployeesUnder(employees.get(i)) + 1);
+            }
+        }
+        return count;
     }
 
     /**
